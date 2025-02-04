@@ -15,9 +15,17 @@ function App() {
     e.preventDefault();
     console.log({ message }, "<<< msg");
     // SOCKET I. kirim events
+    const time = new Date();
+
+    // Mengambil jam dan menit
+    const hours = time.getHours().toString().padStart(2, "0"); // Menambahkan leading zero jika kurang dari 10
+    const minutes = time.getMinutes().toString().padStart(2, "0"); // Menambahkan leading zero jika kurang dari 10
+
+    const formattedTime = `${hours}:${minutes}`; // Format waktu
     socket.emit("messages:create", {
       message,
       username: localStorage.getItem("username"),
+      time: formattedTime,
       // username: username,
     });
     setMessage("");
@@ -34,33 +42,54 @@ function App() {
       setMessages(serverMessages);
     });
   }, []);
-
+  // const chatClass = username === storedUsername ? "chat-end" : "chat-start";
   return (
     <>
-      <ul id="messages">
-        {messages.map(({ text, username }, i) => (
-          <li
-            key={i}
-            style={{
-              textAlign:
-                username === localStorage.getItem("username")
-                  ? "right"
-                  : "left",
-            }}
-          >
-            {text}
-          </li>
-        ))}
-      </ul>
-      <form onSubmit={handleSubmit} id="form" action="">
-        <input
-          id="input"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          // autocomplete="off"
-        />
-        <button>Send</button>
-      </form>
+      <div id="container">
+        <div id="chat">
+          {messages.map(({ text, username, time }) => {
+            // Ambil username dari localStorage
+            const storedUsername = localStorage.getItem("username");
+
+            // Tentukan kelas berdasarkan perbandingan username
+            const chatClass =
+              username === storedUsername ? "chat-end" : "chat-start";
+
+            return (
+              <div className={`chat ${chatClass}`} key={username + text}>
+                <div className="chat-image avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="User Avatar"
+                      src="https://img.freepik.com/free-vector/cartoon-style-robot-vectorart_78370-4103.jpg"
+                    />
+                  </div>
+                </div>
+                <div className="chat-header">
+                  {username} 
+                  <time className="text-xs opacity-50">-{time}</time>
+                </div>
+                <div className="chat-bubble">{text}</div>
+                <div className="chat-footer opacity-50">Delivered</div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* form input chat */}
+        <form action="" id="form" onSubmit={handleSubmit}>
+          <div class="chat-input-container">
+            <input
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              type="text"
+              class="chat-input"
+              placeholder="Type your message..."
+            />
+            <button class="send-btn">Send</button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

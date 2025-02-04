@@ -17,10 +17,10 @@ app.get("/", (req, res) => {
 });
 
 const messages = [
-  {
-    text: "GG project.",
-    username: "System",
-  },
+  // {
+  //   text: "GG project.",
+  //   username: "System",
+  // },
 ];
 
 // WebSocket
@@ -28,10 +28,10 @@ io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
 
   // SOCKET II. listen events
-  socket.on("messages:create", ({ message, username }) => {
+  socket.on("messages:create", ({ message, username, time }) => {
     console.log("message:", message);
     // Message.create({ text: message })
-    messages.push({ text: message, username });
+    messages.push({ text: message, username, time });
     console.log(messages, "<<< msgs");
 
     // SOCKET III. kirim events ke semua user
