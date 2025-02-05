@@ -23,6 +23,8 @@ const messages = [
   },
 ];
 
+let players = {}
+
 // WebSocket
 io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
@@ -44,9 +46,26 @@ io.on("connection", (socket) => {
   // HISTORY II.
   socket.on("messages:fetch", (callback) => {
     // HISTORY III. kita kirim messages
-    console.log(callback, "<<dsa");
+    // console.log(callback, "<<dsa");
     callback(messages);
   });
+
+  socket.on("action:move:left", (newPlayers) => {
+    console.log(newPlayers, "<<<SAVED LEFT");
+    
+    players = newPlayers
+
+    io.emit("action:move:left:response", players);
+  });
+  socket.on("action:move:right", (newPlayers) => {
+    console.log(newPlayers, "<<<SAVED RIGHT");
+
+    
+    players = newPlayers
+
+    io.emit("action:move:right:response", players);
+  });
+
 
   socket.on("disconnect", () => {
     console.log("user disconnected");
