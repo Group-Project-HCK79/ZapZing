@@ -66,7 +66,7 @@ function App() {
                   </div>
                 </div>
                 <div className="chat-header">
-                  {username} 
+                  {username}
                   <time className="text-xs opacity-50">-{time}</time>
                 </div>
                 <div className="chat-bubble">{text}</div>
