@@ -22,12 +22,17 @@ const messages = [
   //   username: "System",
   // },
 ];
-
+let users = [];
 // WebSocket
 io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
-
+  
+  users.push({
+    id: socket.id,
+    username: socket.handshake.auth.username,
+  });
   // SOCKET II. listen events
+  io.emit("users:online", users);
   socket.on("messages:create", ({ message, username, time, image }) => {
     console.log("message:", message);
     // Message.create({ text: message })
@@ -50,6 +55,11 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("user disconnected");
+    const index = users.findIndex((user) => user.id === socket.id);
+    if (index !== 1) {
+      users.splice(index, 1);
+    }
+    io.emit("users:online", users);
   });
 });
 

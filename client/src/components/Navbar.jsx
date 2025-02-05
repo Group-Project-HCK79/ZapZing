@@ -9,23 +9,26 @@ export default function Navbar() {
     navigate("/login");
   }
   return (
-    <>
-      <nav className="w-full bg-blue-400 border-gray-200 dark:bg-gray-900 fixed top-0 left-0 right-0 z-10">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <img src={logo} className="h-10" alt="ZapZing Logo" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-           <b> ZapZing</b>
+    <nav className="w-full bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg h-16 fixed top-0 left-0 right-0 z-10">
+      <div className="max-w-screen-xl flex items-center justify-between mx-auto h-full px-4">
+        <div className="flex items-center gap-4">
+          <img src={logo} className="h-10 hover:scale-105 transition-transform" alt="ZapZing Logo" />
+          <span className="text-2xl font-bold text-white hover:text-blue-100 transition-colors">
+            <a className="no-underline"> ZapZing</a>
           </span>
-          <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8">
-             
-              <li>
-                <button className="btn bg-blue-800" onClick={handleLogOut}>Log Out</button>
-              </li>
-            </ul>
-          </div>
         </div>
-      </nav>
-    </>
+        
+        <div className="md:block" id="navbar-default">
+          <button 
+            onClick={handleLogOut}
+            className="px-6 py-2 bg-white text-blue-600 rounded-full font-semibold
+                     hover:bg-blue-50 transition-colors duration-200
+                     shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+          >
+            Log Out
+          </button>
+        </div>
+      </div>
+    </nav>
   );
 }
