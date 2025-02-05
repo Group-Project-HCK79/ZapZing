@@ -28,10 +28,10 @@ io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
 
   // SOCKET II. listen events
-  socket.on("messages:create", ({ message, username, time }) => {
+  socket.on("messages:create", ({ message, username, time, image }) => {
     console.log("message:", message);
     // Message.create({ text: message })
-    messages.push({ text: message, username, time });
+    messages.push({ text: message, username, time, image });
     console.log(messages, "<<< msgs");
 
     // SOCKET III. kirim events ke semua user
