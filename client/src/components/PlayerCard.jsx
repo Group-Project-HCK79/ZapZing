@@ -1,4 +1,5 @@
-export function PlayerCard() {
+export function PlayerCard({team}) {
+
   return (
     <>
       <div className="card card-compact bg-base-100 w-fit shadow-xl ">
@@ -10,10 +11,11 @@ export function PlayerCard() {
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
+          <h2 className="card-title">Join as {team}</h2>
           <p>If a dog chews shoes whose shoes does he choose?</p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
+            <label>Ready</label>
+            <input type="checkbox" className="checkbox checkbox-primary" />
           </div>
         </div>
       </div>
