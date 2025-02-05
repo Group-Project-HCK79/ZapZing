@@ -1,3 +1,4 @@
+
 import ChatPage from "./pages/ChatPage";
 import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
@@ -17,4 +18,3 @@ export default function App() {
       </SocketContext.Provider>
     </>
   );
-}

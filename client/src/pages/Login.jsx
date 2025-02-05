@@ -113,7 +113,7 @@ export default function Login() {
                 onClick={() => setAvatar("https://robohash.org/sdagedf")}
                 href="#"
                 aria-label="Avatar 1"
-                className="relative inline-flex items-center justify-center w-32 h-32 text-white rounded-full bg-gray-200 shadow-lg"
+                className="relative inline-flex items-center justify-center w-32 h-32 text-white rounded-full bg-gray-200 shadow-lg focus:bg-green-500"
               >
                 <img
                   src="https://robohash.org/sdagedf"
@@ -128,7 +128,7 @@ export default function Login() {
                 onClick={() => setAvatar("https://robohash.org/Xsghdf")}
                 href="#"
                 aria-label="Avatar 2"
-                className="relative inline-flex items-center justify-center w-32 h-32 text-white rounded-full bg-gray-200 shadow-lg"
+                className="relative inline-flex items-center justify-center w-32 h-32 text-white rounded-full bg-gray-200 shadow-lg focus:bg-green-500"
               >
                 <img
                   src="https://robohash.org/Xsghdf"
@@ -143,7 +143,7 @@ export default function Login() {
                 onClick={() => setAvatar("https://robohash.org/rhXwh")}
                 href="#"
                 aria-label="Avatar 3"
-                className="relative inline-flex items-center justify-center w-32 h-32 text-lg text-white rounded-full bg-gray-200 shadow-lg"
+                className="relative inline-flex items-center justify-center w-32 h-32 text-white rounded-full bg-gray-200 shadow-lg focus:bg-green-500"
               >
                 <img
                   src="https://robohash.org/rhXwh"
@@ -158,7 +158,7 @@ export default function Login() {
                 onClick={() => setAvatar("https://robohash.org/13ErtqE")}
                 href="#"
                 aria-label="Avatar 4"
-                className="relative inline-flex items-center justify-center w-32 h-32 text-white rounded-full bg-gray-200 shadow-lg"
+                className="relative inline-flex items-center justify-center w-32 h-32 text-white rounded-full bg-gray-200 shadow-lg focus:bg-green-500"
               >
                 <img
                   src="https://robohash.org/13ErtqE"
@@ -173,7 +173,7 @@ export default function Login() {
                 onClick={() => setAvatar("https://robohash.org/12fEESNgw")}
                 href="#"
                 aria-label="Avatar 5"
-                className="relative inline-flex items-center justify-center w-32 h-32 text-white rounded-full bg-gray-200 shadow-lg"
+               className="relative inline-flex items-center justify-center w-32 h-32 text-white rounded-full bg-gray-200 shadow-lg focus:bg-green-500"
               >
                 <img
                   src="https://robohash.org/12fEESNgw"

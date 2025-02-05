@@ -1,4 +1,5 @@
 import { Navigate, Outlet } from "react-router";
+import Navbar from "../components/Navbar";
 
 export default function AuthLayout() {
   const isAuth = localStorage.username;
@@ -6,6 +7,7 @@ export default function AuthLayout() {
   if (isAuth) {
     return (
       <>
+      <Navbar/>
         <Outlet />
       </>
     );
