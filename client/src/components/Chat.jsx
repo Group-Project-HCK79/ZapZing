@@ -43,7 +43,7 @@ export default function ChatPage() {
           return (
             <div className={`chat ${chatClass}`} key={username + text}>
               <div className="chat-image avatar">
-                <div className="w-10 rounded-full">
+                <div className="w-10 rounded-full bg-green-500">
                   <img alt="User Avatar" src={image} />
                 </div>
               </div>
