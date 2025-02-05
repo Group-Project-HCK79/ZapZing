@@ -33,7 +33,7 @@ export default function ChatPage() {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-full">
       {/* Chat Messages */}
       <div className="flex-grow overflow-auto p-4 bg-blue-200">
         {messages.map(({ text, username, time, image }) => {
