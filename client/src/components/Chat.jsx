@@ -9,6 +9,7 @@ export default function ChatPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!message.trim()) return;
     const time = new Date();
     const formattedTime = time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
