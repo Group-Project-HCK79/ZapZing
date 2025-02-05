@@ -25,6 +25,7 @@ function App() {
     socket.emit("messages:create", {
       message,
       username: localStorage.getItem("username"),
+      image: localStorage.getItem("avatar"),
       time: formattedTime,
       // username: username,
     });
@@ -47,7 +48,7 @@ function App() {
     <>
       <div id="container">
         <div id="chat">
-          {messages.map(({ text, username, time }) => {
+          {messages.map(({ text, username, time, image }) => {
             // Ambil username dari localStorage
             const storedUsername = localStorage.getItem("username");
 
@@ -59,10 +60,7 @@ function App() {
               <div className={`chat ${chatClass}`} key={username + text}>
                 <div className="chat-image avatar">
                   <div className="w-10 rounded-full">
-                    <img
-                      alt="User Avatar"
-                      src="https://img.freepik.com/free-vector/cartoon-style-robot-vectorart_78370-4103.jpg"
-                    />
+                    <img alt="User Avatar" src={image} />
                   </div>
                 </div>
                 <div className="chat-header">
