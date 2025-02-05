@@ -1,0 +1,178 @@
+body, html {
+  height: 100%; /* Pastikan body dan html penuh */
+  margin: 0; /* Menghapus margin default */
+  display: flex; /* Menggunakan flexbox */
+  justify-content: center; /* Memusatkan secara horizontal */
+  align-items: flex-end; /* Memusatkan secara vertikal */
+  background-color: lightblue;
+
+}
+
+#container {
+  width: 500px;
+  height: 100%;
+  background-color: lightblue;
+  text-align: center; /* Menambahkan text-align agar konten dalam container berada di tengah */
+  padding: 0px;
+}
+
+@media (max-width: 768px) {
+  #container {
+    width: 100%; /* Mengubah lebar container menjadi 90% dari lebar layar */
+    height: auto; /* Menyesuaikan tinggi container dengan konten */
+  }
+}
+
+/* Media Query untuk perangkat dengan lebar layar maksimum 480px (smartphone kecil) */
+@media (max-width: 480px) {
+  #container {
+    width: 100%; /* Lebar container lebih kecil pada layar yang lebih kecil */
+    height: auto; /* Menyesuaikan tinggi sesuai konten */
+  }
+}
+
+.chat-input-container {
+  display: flex;
+  width: 500px;
+  padding: 5px;
+  padding-bottom: 15px;
+  background-color: lightblue;
+  /* border-top: 1px solid #ddd; */
+}
+
+.chat-input {
+  flex-grow: 1;
+  padding: 10px;
+  /* border: 1px solid #ddd; */
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+}
+
+.send-btn {
+  padding: 10px 15px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.send-btn:hover {
+  background-color: #45a049;
+}
+
+#chat {
+  padding: 10px;
+  padding-bottom: 50px;
+  /* padding-top: 50px; */
+}
+
+#form {
+  /* background: #ff8c00; */
+  padding: 0.5rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;    
+  height: 2.5rem;
+  box-sizing: border-box;
+  /* backdrop-filter: blur(10px); */
+  align-items: center;
+  /* box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); */
+  /* border-radius: 1rem 1rem 0 0; */
+}
+
+
+/* body {
+  margin: 0;
+  padding-bottom: 4rem;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #fff5e6;
+  color: #333;
+}
+
+#form {
+  background: #ff8c00;
+  padding: 0.5rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: 2.5rem;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  align-items: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem 1rem 0 0;
+}
+
+#input {
+  border: 2px solid #ffa733;
+  padding: 0.5rem 1rem;
+  flex-grow: 1;
+  border-radius: 2rem;
+  margin: 0 0.5rem;
+  font-size: 0.9rem;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+#input:focus {
+  outline: none;
+  border-color: #ff6600;
+  box-shadow: 0 0 5px #ff6600;
+}
+
+#form > button {
+  background: #ff6600;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 2rem;
+  outline: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#form > button:hover {
+  background: #cc5200;
+}
+
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 1rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 3rem);
+  display: flex;
+  flex-direction: column;
+}
+
+#messages > li {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+  max-width: 75%;
+  word-wrap: break-word;
+  display: inline-block;
+}
+
+#messages > li:nth-child(odd) {
+  background: #ffd699;
+  /* width: fit-content; */
+  /* align-self: flex-end; */
+/* } */
+
+/* #messages > li:nth-child(even) {
+  background: #ffcc80; */
+  /* width: fit-content; */
+  /* align-self: flex-end; */
+  /* text-align: right; */
+/* } */ 
