@@ -38,12 +38,12 @@ export default function ChatPage() {
       <div className="flex-grow overflow-auto p-4 bg-blue-200">
         {messages.map(({ text, username, time, image }) => {
           const storedUsername = localStorage.getItem("username");
-          const chatClass = username === storedUsername ? "chat-end" : "chat-start";
+          const chatClass = username === storedUsername ? "chat-end text-black" : "chat-start text-black";
 
           return (
             <div className={`chat ${chatClass}`} key={username + text}>
               <div className="chat-image avatar">
-                <div className="w-10 rounded-full bg-green-500">
+                <div className="w-10 rounded-full bg-gray-200">
                   <img alt="User Avatar" src={image} />
                 </div>
               </div>
@@ -51,15 +51,15 @@ export default function ChatPage() {
                 {username}
                 <time className="text-xs opacity-50">-{time}</time>
               </div>
-              <div className="chat-bubble">{text}</div>
-              <div className="chat-footer opacity-50">Delivered</div>
+              <div className="chat-bubble text-white">{text}</div>
+              <div className="chat-footer opacity-50 text-black">Delivered</div>
             </div>
           );
         })}
       </div>
 
       {/* Chat Input */}
-      <form id="form" onSubmit={handleSubmit} className="p-2 bg-gray-200 border-t">
+      <form id="form" onSubmit={handleSubmit} className="p-2 bg-gray-200 border-t rounded-xl">
         <div className="flex bg-white p-2 rounded">
           <input
             value={message}
