@@ -10,22 +10,45 @@ export default function Home() {
   const navigate = useNavigate();
   const [isRedReady, setIsRedReady] = useState(false);
   const [isBlueReady, setIsBlueReady] = useState(false);
-  const [avatar, setAvatar] = useState("");
-  const [username, setUsername] = useState("");
+  const [avatarRed, setAvatarRed] = useState("");
+  const [avatarBlue, setAvatarBlue] = useState("");
+  const [usernameRed, setUsernameRed] = useState("");
+  const [usernameBlue, setUsernameBlue] = useState("");
 
   useEffect(() => {
     // socket.on("messages:response", (serverMessages) => {
     //   setMessages(serverMessages);
     // });
-
-    socket.on("loginUser", (user) => {
-      console.log(user); // []
-      setAvatar(user[1].avatar);
-      setUsername(user[1].username);
+    
+    // socket.on("login:failed", (message) => {
+    //   Swal.fire({
+    //     icon: "error",
+    //     text: message,
+    //   });
+    // })
+    socket.on("loginUser", (users) => {
+      // localStorage.setItem('username', user1.username)
+      console.log(users);
+      socket.emit("populate:game:users", users)
+      
+      // localStorage.setItem('avatar', user1.avatar)
+      
+      // console.log("Current players:", user1, user2);
     });
     socket.on("ready:toggle:red:update", setIsRedReady);
     socket.on("ready:toggle:blue:update", setIsBlueReady);
     // socket.emit("player", )
+
+    socket.on("populate:game:users:update", (gameUsers) => {
+      console.log(gameUsers, "<<< RESPONSE DARI SERVER");
+      
+      setAvatarRed(gameUsers[0].avatar)
+      setUsernameRed(gameUsers[0].username)
+      if (gameUsers.length > 1) {
+        setAvatarBlue(gameUsers[1].avatar)
+        setUsernameBlue(gameUsers[1].username)
+      }
+    });
 
     socket.on("game:start", () => {
       navigate("/game");
@@ -48,7 +71,7 @@ export default function Home() {
         {/* Main Content */}
         <div className="flex-grow flex flex-col bg-[url(/src/assets/meledak.jpg)] bg-cover bg-no-repeat justify-center items-center">
           <div className="flex justify-between items-center gap-10">
-            <PlayerCard team="red" socket={socket} />
+            <PlayerCard team="red" socket={socket} avatar={avatarRed} username={usernameRed} />
             <div className="flex-none px-5 align-center">
               <img src="/src/assets/vs.png" className="w-40 ml-4" alt="fight" />
               <div className="p-6 rounded-2xl shadow-lg bg-black text-center">
@@ -70,8 +93,8 @@ export default function Home() {
             </div>
             <PlayerCard
               team="blue"
-              avatar={avatar}
-              username={username}
+              avatar={avatarBlue}
+              username={usernameBlue}
               socket={socket}
             />
           </div>

@@ -52,31 +52,19 @@ export function PlayerCard({ team, socket, avatar, username }) {
     });
   }, []);
 
-  // useEffect(() => {
-  //   // console.log(isRedChecked);
-
-  //   if (team === "red" && isRedChecked) {
-  //     localStorage.setItem("team", "red");
-  //   } else if (team === "blue" && isBlueChecked) {
-  //     localStorage.setItem("team", "blue");
-  //   } else {
-  //     localStorage.removeItem("team");
-  //   }
-  // }, [isRedChecked, isBlueChecked]);
-
   return (
     <>
       <div className="card card-compact bg-base-100 w-fit shadow-xl ">
         <figure>
           <img
             className="rounded-full h-80 w-80"
-            src={avatar ? avatar : localStorage.getItem("avatar")}
+            src={avatar}
             alt="Shoes"
           />
         </figure>
         <div className="card-body">
           <h2 className="card-title">Join as {team}</h2>
-          <p>{username? username : localStorage.getItem("username")}</p>
+          <p>{username}</p>
           <div className="card-actions justify-end">
             <label>Ready</label>
             <input
