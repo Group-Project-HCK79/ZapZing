@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function PlayerCard({ team, socket }) {
+export function PlayerCard({ team, socket, avatar, username }) {
   const [isRedChecked, setIsRedChecked] = useState(false);
   const [isBlueChecked, setIsBlueChecked] = useState(false);
   const [forbidCheckRed, setForbidCheckRed] = useState(false);
@@ -8,7 +8,7 @@ export function PlayerCard({ team, socket }) {
 
   const checkHandler = () => {
     console.log(!forbidCheckRed, !isBlueChecked);
-    
+
     if (team === "red" && !forbidCheckRed) {
       socket.emit("ready:toggle:red", !isRedChecked);
     } else if (team === "blue" && !forbidCheckBlue) {
@@ -25,7 +25,7 @@ export function PlayerCard({ team, socket }) {
         localStorage.removeItem("team");
         setForbidCheckBlue(false);
       }
-    })
+    });
     socket.on("ready:toggle:red:update", (resRedChecked) => {
       setIsRedChecked(resRedChecked);
     });
@@ -33,8 +33,6 @@ export function PlayerCard({ team, socket }) {
       console.log("Forbid", resRedChecked);
       setForbidCheckRed(resRedChecked);
     });
-
-
 
     socket.on("ready:toggle:blue:save", (resBlueChecked) => {
       if (resBlueChecked) {
@@ -52,7 +50,6 @@ export function PlayerCard({ team, socket }) {
       console.log("Forbid", resBlueChecked);
       setForbidCheckBlue(resBlueChecked);
     });
-    
   }, []);
 
   // useEffect(() => {
@@ -73,13 +70,13 @@ export function PlayerCard({ team, socket }) {
         <figure>
           <img
             className="rounded-full h-80 w-80"
-            src={localStorage.getItem("avatar")}
+            src={avatar ? avatar : localStorage.getItem("avatar")}
             alt="Shoes"
           />
         </figure>
         <div className="card-body">
           <h2 className="card-title">Join as {team}</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <p>{username? username : localStorage.getItem("username")}</p>
           <div className="card-actions justify-end">
             <label>Ready</label>
             <input

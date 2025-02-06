@@ -23,15 +23,46 @@ const messages = [
   // },
 ];
 
-let players = {}
+let players = {};
 const isChecked = {
   red: false,
-  blue: false
-}
+  blue: false,
+};
+
+let users = [];
 
 // WebSocket
 io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
+  //SOCKET listen login
+  socket.on("login:user", ({ username, avatar }) => {
+    users.push({ username, avatar });
+    console.log(users, "<-- berhasil login dia");
+
+    io.emit("loginUser", users);
+  });
+
+  socket.on("logoutHandle", (username) => {
+    users = users.filter((user) => user.username !== username);
+    console.log(users, "<-- setelah logout");
+    
+  }
+);
+  // // Handle user disconnect
+  // socket.on("disconnect", () => {
+  //   console.log("user disconnected", socket.id);
+
+  //   if (user1 && user1.socketId === socket.id) {
+  //     console.log("User 1 disconnected.");
+  //     user1 = null;
+  //   } else if (user2 && user2.socketId === socket.id) {
+  //     console.log("User 2 disconnected.");
+  //     user2 = null;
+  //   }
+
+  //   // Kirim update ke semua user setelah ada yang keluar
+  //   io.emit("loginUser", { user1, user2 });
+  // });
 
   // SOCKET II. listen events
   socket.on("messages:create", ({ message, username, time, image }) => {
@@ -54,14 +85,18 @@ io.on("connection", (socket) => {
     callback(messages);
   });
 
+  socket.on("populate:game:users", (gameUsers) => {
+    io.emit("populate:game:users:update", gameUsers); // General update event
+  });
+
   socket.on("ready:toggle:red", (isRedChecked) => {
-    isChecked.red = isRedChecked
+    isChecked.red = isRedChecked;
     socket.emit("ready:toggle:red:save", isChecked.red);
     io.emit("ready:toggle:red:update", isChecked.red);
     socket.broadcast.emit("ready:toggle:red:forbid", isChecked.red);
   });
   socket.on("ready:toggle:blue", (isBlueChecked) => {
-    isChecked.blue = isBlueChecked
+    isChecked.blue = isBlueChecked;
     socket.emit("ready:toggle:blue:save", isChecked.blue);
     io.emit("ready:toggle:blue:update", isChecked.blue);
     socket.broadcast.emit("ready:toggle:blue:forbid", isChecked.blue);
@@ -69,7 +104,7 @@ io.on("connection", (socket) => {
   socket.on("game:start", () => {
     if (isChecked.red && isChecked.blue) {
       console.log("Both players ready. Starting game...");
-      io.emit("game:start");  // Notify all clients to start
+      io.emit("game:start"); // Notify all clients to start
     } else {
       socket.emit("game:start:failed", "Both players need to be ready!");
     }

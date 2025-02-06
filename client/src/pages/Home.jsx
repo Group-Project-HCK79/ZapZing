@@ -10,10 +10,22 @@ export default function Home() {
   const navigate = useNavigate();
   const [isRedReady, setIsRedReady] = useState(false);
   const [isBlueReady, setIsBlueReady] = useState(false);
+  const [avatar, setAvatar] = useState("");
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
+    // socket.on("messages:response", (serverMessages) => {
+    //   setMessages(serverMessages);
+    // });
+
+    socket.on("loginUser", (user) => {
+      console.log(user); // []
+      setAvatar(user[1].avatar);
+      setUsername(user[1].username);
+    });
     socket.on("ready:toggle:red:update", setIsRedReady);
     socket.on("ready:toggle:blue:update", setIsBlueReady);
+    // socket.emit("player", )
 
     socket.on("game:start", () => {
       navigate("/game");
@@ -56,7 +68,12 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <PlayerCard team="blue" socket={socket} />
+            <PlayerCard
+              team="blue"
+              avatar={avatar}
+              username={username}
+              socket={socket}
+            />
           </div>
         </div>
 

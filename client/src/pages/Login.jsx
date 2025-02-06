@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, Link, data } from "react-router";
+// import { SocketContext } from "../App";
 import Swal from "sweetalert2";
+import { io } from "socket.io-client";
 
 export default function Login() {
+  // const socketContext = useContext(SocketContext);
+  // const socket = socketContext?.socket;
+  const socket = io("http://localhost:3000");
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -11,8 +16,8 @@ export default function Login() {
   console.log(avatar);
 
   function handleLogin(e) {
+    e.preventDefault();
     try {
-      e.preventDefault();
       if (!username || !avatar) {
         throw { name: "Authentication" };
       }
@@ -22,11 +27,15 @@ export default function Login() {
       //       text: "Please choose your avatar",
       //     });
       //   }
+      socket.emit("login:user", {
+        username,
+        avatar,
+      });
       localStorage.setItem("username", username);
       localStorage.setItem("avatar", avatar);
       navigate("/");
     } catch (err) {
-      console.log(err.name);
+      console.log(err);
       Swal.fire({
         icon: "error",
         text: "Please fill username and avatar",
@@ -173,7 +182,7 @@ export default function Login() {
                 onClick={() => setAvatar("https://robohash.org/12fEESNgw")}
                 href="#"
                 aria-label="Avatar 5"
-               className="relative inline-flex items-center justify-center w-32 h-32 text-white rounded-full bg-gray-200 shadow-lg focus:bg-green-500"
+                className="relative inline-flex items-center justify-center w-32 h-32 text-white rounded-full bg-gray-200 shadow-lg focus:bg-green-500"
               >
                 <img
                   src="https://robohash.org/12fEESNgw"
