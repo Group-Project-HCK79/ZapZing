@@ -164,7 +164,7 @@ export default function Login() {
                     type="text"
                     name="username"
                     placeholder="Username"
-                    className="peer relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none border-slate-200 text-slate-500 invalid:border-sky-500 invalid:text-sky-500 focus:border-sky-500 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                    className="bg-white peer relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none border-slate-200 text-slate-500 invalid:border-sky-500 invalid:text-sky-500 focus:border-sky-500 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                   />
                   <label
                     htmlFor="username"
