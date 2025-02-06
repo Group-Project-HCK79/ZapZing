@@ -11,7 +11,7 @@ export function Game() {
   const username = localStorage.getItem("username");
   const team = localStorage.getItem("team");
   const opponentTeam = team === "red" ? "blue" : "red";
-
+  const [loading, setLoading] = useState(true);
   const [players, setPlayers] = useState({
     red: {
       position: 2,
@@ -30,6 +30,10 @@ export function Game() {
       power: 5,
     },
   });
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 3000);
 
   function handleRestart() {
     setPlayers({
@@ -124,7 +128,7 @@ export function Game() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
     socket.on("action:update", (updatedPlayers) => {
@@ -136,6 +140,13 @@ export function Game() {
     };
   }, []);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-black text-white text-3xl">
+        Loading Game...
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-[url(/src/assets/arenaBg2.jpg)]">
       <div className="text-white text-3xl font-bold mb-10">ZapZing</div>
@@ -152,18 +163,20 @@ export function Game() {
           <div>
             {players[team].isDead || players[opponentTeam].isDead ? (
               <p
-                className={`font-bold text-${
+                className={`font-bold text-3xl mt-40 text-${
                   players[team].isDead ? opponentTeam : team
                 }-400`}
               >
                 {players[team].isDead ? opponentTeam : team} wins
               </p>
             ) : (
-              <img
-                src="/src/assets/redVsBlue.png"
-                className="w-20 h-20"
-                alt="Fight"
-              />
+              <div>
+                <img
+                  src="/src/assets/redVsBlue.png"
+                  className="w-20 h-20"
+                  alt="Fight"
+                />
+              </div>
             )}
           </div>
           <div>
@@ -179,10 +192,18 @@ export function Game() {
           {arrays.map((_, position) => (
             <div key={position} className="w-20 h-20 border-b">
               {players.red.position === position && (
-                <img src={players.red.sprite} alt="Red Player" />
+                <img
+                  className="absolute"
+                  src={players.red.sprite}
+                  alt="Red Player"
+                />
               )}
               {players.blue.position === position && (
-                <img src={players.blue.sprite} alt="Blue Player" />
+                <img
+                  className="absolute"
+                  src={players.blue.sprite}
+                  alt="Blue Player"
+                />
               )}
             </div>
           ))}
@@ -190,13 +211,13 @@ export function Game() {
       </div>
       <button
         onClick={() => navigate("/")}
-        className="bg-gray-300 rounded-2xl p-2 cursor-pointer mt-10"
+        className="bg-gray-300 text-black rounded-2xl p-2 cursor-pointer mt-10"
       >
         Back to lobby?
       </button>
       <button
         onClick={handleRestart}
-        className="bg-gray-400 rounded-2xl p-2 cursor-pointer mt-3"
+        className="bg-red-300 text-black rounded-2xl p-2 cursor-pointer mt-3"
       >
         Restart
       </button>

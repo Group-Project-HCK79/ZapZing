@@ -6,7 +6,7 @@ import { SocketContext } from "../App";
 
 // const socket = io("http://localhost:3000");
 
-export default function ChatPage() {
+export default function ChatPageBbi() {
   const { socket } = useContext(SocketContext);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);

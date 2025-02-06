@@ -56,22 +56,20 @@ export function PlayerCard({ team, socket, avatar, username }) {
     <>
       <div className="card card-compact bg-base-100 w-fit shadow-xl ">
         <figure>
-          <img
-            className="rounded-full h-80 w-80"
-            src={avatar}
-            alt="Shoes"
-          />
+          <img className="rounded-full h-80 w-80" src={avatar} alt="Shoes" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">Join as {team}</h2>
           <p>{username}</p>
           <div className="card-actions justify-end">
-            <label>Ready</label>
+            <label>Ready?</label>
             <input
               type="checkbox"
               checked={team === "red" ? isRedChecked : isBlueChecked}
               onChange={checkHandler}
-              className="checkbox checkbox-primary"
+              className={`checkbox checkbox-xl ${
+                team === "red" ? "checkbox-error" : "checkbox-info"
+              }`}
             />
           </div>
         </div>
