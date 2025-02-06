@@ -8,7 +8,7 @@ import Home from "./pages/Home.jsx";
 import { StrictMode } from "react";
 import { Game } from "./pages/Game.jsx";
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route element={<NoAuthLayout />}>
@@ -21,5 +21,5 @@ createRoot(document.getElementById("root")).render(
         <Route path="/game" element={<Game />} />
       </Routes>
     </BrowserRouter>
-  </StrictMode>
+  // </StrictMode>
 );

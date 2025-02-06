@@ -24,6 +24,10 @@ const messages = [
 ];
 
 let players = {}
+const isChecked = {
+  red: false,
+  blue: false
+}
 
 // WebSocket
 io.on("connection", (socket) => {
@@ -48,6 +52,27 @@ io.on("connection", (socket) => {
     // HISTORY III. kita kirim messages
     console.log(callback, "<<dsa");
     callback(messages);
+  });
+
+  socket.on("ready:toggle:red", (isRedChecked) => {
+    isChecked.red = isRedChecked
+    socket.emit("ready:toggle:red:save", isChecked.red);
+    io.emit("ready:toggle:red:update", isChecked.red);
+    socket.broadcast.emit("ready:toggle:red:forbid", isChecked.red);
+  });
+  socket.on("ready:toggle:blue", (isBlueChecked) => {
+    isChecked.blue = isBlueChecked
+    socket.emit("ready:toggle:blue:save", isChecked.blue);
+    io.emit("ready:toggle:blue:update", isChecked.blue);
+    socket.broadcast.emit("ready:toggle:blue:forbid", isChecked.blue);
+  });
+  socket.on("game:start", () => {
+    if (isChecked.red && isChecked.blue) {
+      console.log("Both players ready. Starting game...");
+      io.emit("game:start");  // Notify all clients to start
+    } else {
+      socket.emit("game:start:failed", "Both players need to be ready!");
+    }
   });
 
   socket.on("action:move:left", (newPlayers) => {
