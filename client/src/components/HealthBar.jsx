@@ -1,16 +1,16 @@
 import { useState } from "react";
 export const ControlledHealthBar = ({
-  hp = 100,
-  maxHp = 100,
-  color = "red",
+  hp ,
+  maxHp,
+  color
 }) => {
-  // const maxHp = 100;
-  // const [hp, setHp] = useState(maxHp);
   const barWidth = (hp / maxHp) * 100;
 
   const colorMap = {
     red: "bg-red-600",
     blue: "bg-blue-600",
+    yellow: "bg-yellow-600",
+    green: "bg-green-600",
   };
 
   return (
@@ -24,21 +24,6 @@ export const ControlledHealthBar = ({
           {hp} / {maxHp}
         </div>
       </div>
-      {/* <button
-        className="px-4 py-2 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 transition"
-        onClick={() => {
-          const damage = Math.floor(Math.random() * maxHp);
-          setHp(Math.max(0, hp - damage));
-        }}
-      >
-        Hit Random
-      </button>
-      <button
-        className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition"
-        onClick={() => setHp(maxHp)}
-      >
-        Reset
-      </button> */}
     </div>
   );
 };
