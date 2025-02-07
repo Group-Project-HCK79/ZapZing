@@ -7,7 +7,7 @@ import { io } from "socket.io-client";
 export default function Login() {
   // const socketContext = useContext(SocketContext);
   // const socket = socketContext?.socket;
-  const socket = io("http://localhost:3000");
+  const socket = io("http://server.danizrafidz.my.id");
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -163,7 +163,9 @@ export default function Login() {
             {/* Body */}
             <div className="p-8">
               <header className="mb-6 text-center">
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Input Your Username!</h2>
+                <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                  Input Your Username!
+                </h2>
               </header>
               <div className="flex flex-col space-y-6">
                 {/* Input field */}
@@ -195,12 +197,12 @@ export default function Login() {
                 type="submit"
                 value="Login"
                 className="inline-flex items-center justify-center w-full h-10 gap-2 px-5 text-sm font-medium tracking-wide text-white transition duration-300 rounded focus-visible:outline-none whitespace-nowrap bg-sky-500 hover:bg-sky-600 active:bg-sky-700 disabled:cursor-not-allowed disabled:border-sky-300 disabled:bg-sky-300 disabled:shadow-none"
-              >Let's Go!</button>
+              >
+                Let's Go!
+              </button>
             </div>
           </form>
           {/* End Card with form */}
-
-
         </div>
       </div>
     </>

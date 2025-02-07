@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { SocketContext } from "../App";
 
-// const socket = io("http://localhost:3000");
+// const socket = io("http://server.danizrafidz.my.id");
 
 export default function ChatPageBbi() {
   const { socket } = useContext(SocketContext);
