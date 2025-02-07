@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import ChatPage from "../components/Chat";
 import { PlayerCard } from "../components/PlayerCard";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3000");
+const socket = io("http://server.danizrafidz.my.id");
 
 export default function Home() {
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ export default function Home() {
     <div className="flex-grow">
       <div className="flex h-[90vh]">
         {/* Main Content */}
-        <div className="flex-grow flex flex-col bg-[url(/src/assets/meledak.jpg)] bg-cover bg-no-repeat justify-center items-center">
+        <div className="flex-grow flex flex-col bg-[url(/assets/meledak.jpg)] bg-cover bg-no-repeat justify-center items-center">
           <div className="flex justify-between items-center gap-10">
             <PlayerCard
               team="red"
@@ -80,7 +80,7 @@ export default function Home() {
               username={usernameRed}
             />
             <div className="flex-none px-5 align-center">
-              <img src="/src/assets/vs.png" className="w-40 ml-4" alt="fight" />
+              <img src="/assets/vs.png" className="w-40 ml-4" alt="fight" />
               <div className="p-6 rounded-2xl shadow-lg bg-black text-center">
                 <h2 className="text-2xl font-bold mb-6 text-white">
                   Join Room
@@ -104,6 +104,15 @@ export default function Home() {
               username={usernameBlue}
               socket={socket}
             />
+          </div>
+          <div className="p-6 rounded-2xl shadow-lg bg-black text-center">
+            <h2 className="text-2xl font-bold mb-6 text-white">4 Players AI</h2>
+            <button
+              onClick={() => navigate("/game-four")}
+              className={`px-6 py-3 text-xl rounded-full shadow-md transition bg-red-500 hover:bg-blue-600 cursor-pointer text-white`}
+            >
+              Play (Single Player)
+            </button>
           </div>
         </div>
 

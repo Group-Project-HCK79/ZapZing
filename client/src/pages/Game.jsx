@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { useNavigate } from "react-router";
 import { ControlledHealthBar } from "../components/HealthBar";
 
-const socket = io("http://localhost:3000");
+const socket = io("http://server.danizrafidz.my.id");
 const arrays = Array.from({ length: 10 }, (_, i) => i);
 
 export function Game() {
@@ -16,7 +16,7 @@ export function Game() {
     red: {
       position: 2,
       health: 100,
-      sprite: "/src/assets/redPlayer.png",
+      sprite: "/assets/redPlayer.png",
       canPunch: true,
       isDead: false,
       power: 5,
@@ -24,7 +24,7 @@ export function Game() {
     blue: {
       position: 7,
       health: 100,
-      sprite: "/src/assets/bluePlayer.png",
+      sprite: "/assets/bluePlayer.png",
       canPunch: true,
       isDead: false,
       power: 5,
@@ -55,12 +55,12 @@ export function Game() {
               let resetPlayers = {
                 red: {
                   ...prev.red,
-                  sprite: "/src/assets/redPlayer.png",
+                  sprite: "/assets/redPlayer.png",
                   canPunch: true,
                 },
                 blue: {
                   ...prev.blue,
-                  sprite: "/src/assets/bluePlayer.png",
+                  sprite: "/assets/bluePlayer.png",
                   canPunch: true,
                 },
               };
@@ -75,7 +75,7 @@ export function Game() {
             0,
             newPlayers[team].position - 1
           );
-          newPlayers[team].sprite = `/src/assets/${team}MoveL.png`;
+          newPlayers[team].sprite = `/assets/${team}MoveL.png`;
           socket.emit("action:move:left", newPlayers);
           resetAction(200);
         }
@@ -85,7 +85,7 @@ export function Game() {
             arrays.length - 1,
             newPlayers[team].position + 1
           );
-          newPlayers[team].sprite = `/src/assets/${team}MoveR.png`;
+          newPlayers[team].sprite = `/assets/${team}MoveR.png`;
           socket.emit("action:move:right", newPlayers);
           resetAction(200);
         }
@@ -93,8 +93,8 @@ export function Game() {
         if ((e.key === "k" || e.key === "l") && newPlayers[team].canPunch) {
           newPlayers[team].sprite =
             e.key === "k"
-              ? `/src/assets/${team}PunchL.png`
-              : `/src/assets/${team}PunchR.png`;
+              ? `/assets/${team}PunchL.png`
+              : `/assets/${team}PunchR.png`;
           newPlayers[team].canPunch = false;
 
           if (
@@ -107,8 +107,8 @@ export function Game() {
           ) {
             newPlayers[opponentTeam].sprite =
               e.key === "k"
-                ? `/src/assets/${opponentTeam}HurtL.png`
-                : `/src/assets/${opponentTeam}HurtR.png`;
+                ? `/assets/${opponentTeam}Hurt.png`
+                : `/assets/${opponentTeam}Hurt.png`;
             newPlayers[opponentTeam].health = Math.max(
               0,
               newPlayers[opponentTeam].health - newPlayers[team].power
@@ -148,9 +148,9 @@ export function Game() {
     );
   }
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-[url(/src/assets/arenaBg2.jpg)]">
+    <div className="flex flex-col justify-center items-center h-screen bg-[url(/assets/arenaBg2.jpg)]">
       <div className="text-white text-3xl font-bold mb-10">ZapZing</div>
-      <div className="border-5 flex flex-col justify-between h-100 bg-[url(/src/assets/arenaBg1.jpg)]">
+      <div className="border-5 flex flex-col justify-between h-100 bg-[url(/assets/arenaBg1.jpg)]">
         <div id="stats" className="flex justify-between px-4">
           <div className="flex flex-col">
             <p className="font-bold text-red-400 self-end">Red</p>
@@ -172,7 +172,7 @@ export function Game() {
             ) : (
               <div>
                 <img
-                  src="/src/assets/redVsBlue.png"
+                  src="/assets/redVsBlue.png"
                   className="w-20 h-20"
                   alt="Fight"
                 />

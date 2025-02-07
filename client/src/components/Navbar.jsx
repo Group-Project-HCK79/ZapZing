@@ -1,14 +1,13 @@
 import { Link, useNavigate } from "react-router";
-import logo from "../assets/ZapZing.png";
+import logo from "/assets/ZapZing.png";
 import { io } from "socket.io-client";
 
 export default function Navbar() {
-  const socket = io("http://localhost:3000");
+  const socket = io("http://server.danizrafidz.my.id");
   const navigate = useNavigate();
-  function handleLogOut(e) 
-  {
+  function handleLogOut(e) {
     e.preventDefault();
-    socket.emit("logoutHandle",localStorage.getItem("username") )
+    socket.emit("logoutHandle", localStorage.getItem("username"));
     localStorage.clear();
     navigate("/login");
   }
